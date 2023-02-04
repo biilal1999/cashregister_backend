@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :products, only: %i[index], defaults: { format: :json }
+  resources :carts, only: %i[index create], defaults: { format: :json }
 end
