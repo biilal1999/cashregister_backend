@@ -1,0 +1,1 @@
+json.call(product, :id, :product_code, :name, :price)
