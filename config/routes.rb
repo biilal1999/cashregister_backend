@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     resources :products, only: %i[index]
     resources :carts, only: %i[index create] do
-      resources :products, only: %i[create], controller: 'cart_products'
+      resources :products, only: %i[create update], controller: 'cart_products'
     end
   end
 end
