@@ -1,0 +1,5 @@
+json.id cart_product.id
+json.product_id cart_product.product_id
+json.quantity cart_product.quantity
+json.product_code cart_product.product_code
+json.product_price cart_product.product_price

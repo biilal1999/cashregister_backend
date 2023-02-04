@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :products, only: %i[index], defaults: { format: :json }
-  resources :carts, only: %i[index create], defaults: { format: :json }
+  defaults format: :json do
+    resources :products, only: %i[index]
+    resources :carts, only: %i[index create] do
+      resources :products, only: %i[create], controller: 'cart_products'
+    end
+  end
 end
