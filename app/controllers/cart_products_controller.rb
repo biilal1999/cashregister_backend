@@ -1,7 +1,7 @@
 class CartProductsController < ApplicationController
-    before_action -> { cart }, only: %i[create update]
+    before_action -> { cart }
     before_action -> { product }, only: %i[create]
-    before_action -> { cart_product }, only: %i[update]
+    before_action -> { cart_product }, except: %i[create]
 
     def create
         cart_product = CartProduct.new(cart_id: @cart&.id, product_id: @product.id)
@@ -9,7 +9,11 @@ class CartProductsController < ApplicationController
     end
 
     def update
-        bad_request (@cart_product) unless @cart_product.update(cart_product_params)
+        bad_request(@cart_product) unless @cart_product.update(cart_product_params)
+    end
+
+    def destroy
+        @cart_product.destroy
     end
 
     private
