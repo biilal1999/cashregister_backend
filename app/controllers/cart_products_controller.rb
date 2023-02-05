@@ -1,19 +1,22 @@
 class CartProductsController < ApplicationController
-    before_action -> { cart }
+    before_action -> { cart }, only: %i[create]
     before_action -> { product }, only: %i[create]
     before_action -> { cart_product }, except: %i[create]
 
     def create
         cart_product = CartProduct.new(cart_id: @cart&.id, product_id: @product.id)
         bad_request(cart_product) unless cart_product.save
+        @cart = cart_product.cart
     end
 
     def update
         bad_request(@cart_product) unless @cart_product.update(cart_product_params)
+        @cart = @cart_product.cart
     end
 
     def destroy
         @cart_product.destroy
+        @cart = @cart_product.cart
     end
 
     private

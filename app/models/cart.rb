@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
 
     validates :status, presence: true, inclusion: { in: %w(PENDING CANCELED), message: "%{value} is not a valid status" }
     validates :total_price, numericality: { greater_than_or_equal_to: 0 }
-    validate :one_active_cart
+    validate :one_active_cart, on: :create
 
     private
 
