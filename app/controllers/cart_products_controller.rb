@@ -1,4 +1,5 @@
 class CartProductsController < ApplicationController
+    before_action -> { cart_product_params }, except: %i[destroy]
     before_action -> { cart }, only: %i[create]
     before_action -> { product }, only: %i[create]
     before_action -> { cart_product }, except: %i[create]
@@ -37,6 +38,6 @@ class CartProductsController < ApplicationController
     end
 
     def cart_product_params
-        params.require(:cart_product).permit(:quantity)
+        params.require(:cart_product).permit(:quantity, :product_id)
     end
 end
